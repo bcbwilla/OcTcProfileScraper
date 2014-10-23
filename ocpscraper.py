@@ -65,8 +65,12 @@ def get_player_info(username):
     badges = top_section.find_all("span",{"class":"label"})
     profile['badges'] = map(lambda x: x.text.strip(), badges)
 
-    # total
+    # kills
     for div in top_section.find_all('div',{'class':'span5'}):
+        extract_stats([div.find('h2').text])
+
+    # deaths
+    for div in top_section.find_all('div',{'class':'span4'}):
         extract_stats([div.find('h2').text])
 
     # friends
@@ -88,6 +92,11 @@ def get_player_info(username):
             prefix = title_text.replace(' ','_').replace('stats', '')
 
         extract_stats(map(lambda x: x.text, stats), prefix=prefix)
+
+    # objectives
+    objectives_pane = soup.find('div', {'id':'objectives'})
+    for objective in objectives_pane.find_all('div', {'class':'span4'}):
+        extract_stats([objective.find('h2').text])
 
     return profile
 
