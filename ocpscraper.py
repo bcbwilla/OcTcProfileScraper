@@ -38,6 +38,17 @@ def get_player_info(username):
         for stat in stat_list:
             data = stat.strip().split('\n')
             value = data[0]
+
+            # attempt to convert to number, and deal
+            # with using 'k' as an abbreviation to 1000.
+            try:
+                if value[-1] == 'k':
+                    value = float(value[:-1])*1000
+                else:
+                    value = float(value)
+            except ValueError:
+                pass
+
             name = prefix + data[1].replace(' ', '_')
             profile[name] = value
 
