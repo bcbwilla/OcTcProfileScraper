@@ -5,7 +5,7 @@ Returns user information from their profile at [http://www.oc.tc/](http://www.oc
 ## Usage
 
 From the command line:
-`python ocpscraper <username>`
+`python ocpscraper.py <username>`
 
 With python:
 ```python
